@@ -1,0 +1,17 @@
+/* .dropzone {
+  display: block;
+  flex: 1 auto;
+  width: 100%;
+} */
+
+.dropzone p {
+  padding: 50px 10px;
+  text-align: center;
+  color: white;
+  line-height: 1.85em;
+}
+
+.dropzone div {
+  background-color: #2986CE;
+  border-color: white !important; 
+}

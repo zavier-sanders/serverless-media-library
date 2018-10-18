@@ -1,0 +1,23 @@
+
+
+#upload-modal, #edit-modal {
+  margin: 50px auto !important;
+}
+
+.sk-layout__top-bar {
+  position: relative;
+  background: #1B1C1D;
+
+}
+
+.sk-layout__body {
+  margin: 20px auto 0;
+}
+
+.ui.cards > .card > .content, .ui.card > .content > .header {
+  word-wrap: break-word;
+}
+
+#upgradeModal {
+  margin: 10% auto !important;
+}

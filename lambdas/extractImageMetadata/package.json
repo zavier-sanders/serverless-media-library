@@ -1,0 +1,10 @@
+{
+  "name": "extract-image-metadata",
+  "description": "Extracts EXIF, size, format, etc. info from an image",
+  "author": "Zavier Sanders",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "gm": "1.23.0",
+    "bluebird": "3.4.6"
+  }
+}
