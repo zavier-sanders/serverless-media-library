@@ -18,7 +18,7 @@ export function getInfo(imageID) {
   };
   let promise = new Promise((resolve, reject) => {
     docClient.get(params).promise().then((data) => {
-      //console.log('getInfo', data);
+      console.log('getInfo', data);
       resolve(data.Item);
     }).catch((err) => {
       reject(err);
@@ -32,11 +32,11 @@ export function createCollection(collectionData) {
   var params = {
       TableName: CONFIG.DDBCollectionsTable,
       Item:{
-          "collectionID": collectionData.collectionID,
+          "albumID": collectionData.collectionID,
           "creationTime": collectionData.creationTime,
           "name": collectionData.name,
           "userID": collectionData.userID,
-          "currentStatus": 'active',
+          "status": 'active',
           "people": collectionData.people
       },
       ConditionExpression: 'attribute_not_exists (collectionID)'
@@ -57,18 +57,6 @@ export function createCollection(collectionData) {
 export function uploadAsset(params) {
   
   let promise = new Promise((resolve, reject) => {
-    // S3.upload(params.Key, params.Body, {
-    //   // contentType: 'application/octet-stream',
-    //   bucket: CONFIG.S3DAMBucket,
-    //   metadata: params.Metadata,
-    //   ACL:'public-read'
-    // })
-    // .then((data ) => {
-    //   resolve(data);
-    // }).catch((err) => {
-    //   reject(err);
-    // })
-
     S3.upload(params, (err, s3res) => {
         if (err){
           reject(err);
@@ -135,10 +123,10 @@ export function updatePhoto(photoData) {
     Key: {
       imageID: photoData.imageID
     },
-    UpdateExpression: "set fileName = :fileName, collectionID = :collectionID, collectionName = :collectionName, notes = :Notes, tags = :Tags, rating = :rating",
+    UpdateExpression: "set fileName = :fileName, albumID = :albumID, collectionName = :collectionName, notes = :Notes, tags = :Tags, rating = :rating",
     ExpressionAttributeValues:{
         ":fileName": photoData.fileName,
-        ":collectionID": photoData.collectionID,
+        ":albumID": photoData.collectionID,
         ":collectionName": photoData.collectionName,
         ":Notes": photoData.Notes,
         ":Tags": photoData.Tags,
@@ -189,7 +177,7 @@ export function deleteCollection(collectionID) {
   const params = {
     TableName: CONFIG.DDBCollectionsTable,
     Key: {
-      collectionID: collectionID
+      albumID: collectionID
     }
   };
   let promise = new Promise((resolve, reject) => {
@@ -207,10 +195,11 @@ export function deleteCollection(collectionID) {
 
 // Delete single photo by imageID
 export function deletePhoto(imageID) {
+  console.log('imageID', imageID)
   const params = {
     TableName: CONFIG.DDBAssetsTable,
     Key: {
-      imageID: imageID.replace(/ /g, '+').replace('@', '%40')
+      imageID: imageID //.replace(/ /g, '+').replace('@', '%40')
     }
   };
   let promise = new Promise((resolve, reject) => {
@@ -227,17 +216,11 @@ export function deletePhoto(imageID) {
 
 // Delete all photos by collectionID
 export function deletePhotosS3(collectionID) {
-  const deleteParams = {
-    TableName: CONFIG.DDBAssetsTable,
-    Key: {
-      collectionID: collectionID.replace(/ /g, '+').replace('@', '%40')
-    }
-  };
 
   let queryParams = {
     TableName: CONFIG.DDBAssetsTable,
-    IndexName: 'collectionID-index',
-    KeyConditionExpression: 'collectionID = :hkey',
+    IndexName: 'albumID-index',
+    KeyConditionExpression: 'albumID = :hkey',
     ExpressionAttributeValues: {
       ':hkey': collectionID
     }
@@ -295,14 +278,14 @@ export function archivePhotos(collectionID) {
   const deleteParams = {
     TableName: CONFIG.DDBAssetsTable,
     Key: {
-      collectionID: collectionID.replace(/ /g, '+')
+      albumID: collectionID.replace(/ /g, '+')
     }
   };
 
   let queryParams = {
     TableName: CONFIG.DDBAssetsTable,
-    IndexName: 'collectionID-index',
-    KeyConditionExpression: 'collectionID = :hkey',
+    IndexName: 'albumID-index',
+    KeyConditionExpression: 'albumID = :hkey',
     ExpressionAttributeValues: {
       ':hkey': collectionID
     }

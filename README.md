@@ -1,4 +1,4 @@
-# GR Digital Asset Management 
+# Serverless AI-Powered Media Library
 
 # Run App:
 1. npm install

@@ -5,25 +5,6 @@ import {getCurrentUser} from '../auth/auth'
 
 import './upload.css'
 
-Amplify.configure({
-  Auth: {
-      // REQUIRED - Amazon Cognito Identity Pool ID
-      identityPoolId: 'us-west-2:287d5a6d-d1f0-46d8-a601-f02df56e7a70',
-  // REQUIRED - Amazon Cognito Region
-      region: 'us-west-2', 
-  // OPTIONAL - Amazon Cognito User Pool ID
-      userPoolId: 'us-west-2_ZYgvPT6Q8', 
-  // OPTIONAL - Amazon Cognito Web Client ID
-      userPoolWebClientId: '6krbknc8u4crau5sh0ddo8g2ud',
-  },
-  Storage: {
-    // level: 'private',
-    bucket: 'photo-sharing-backend-photorepos3bucket-19pxri1qd0s3m',//Your bucket ARN;
-    region: 'us-west-2',//Specify the region your bucket was created in;
-    identityPoolId: 'us-west-2:287d5a6d-d1f0-46d8-a601-f02df56e7a70',//Specify your identityPoolId for Auth and Unauth access to your bucket;
-  }
-});
-
 window.URL = window.URL || window.webkitURL;
 
 export default class Uploader extends React.Component {
@@ -49,6 +30,8 @@ export default class Uploader extends React.Component {
         const metadata = {
           userid: user.email,
           collectionID: collection.replace(/ /g, '+') + "/" + params.folder.toLowerCase(),
+          // remove this
+          albumID: collection.replace(/ /g, '+') + "/" + params.folder.toLowerCase(),
           collection: collection.replace(/ /g, '+') + "/" + params.folder.toLowerCase(),
           collectionname: params.folder.charAt(0).toUpperCase() + params.folder.slice(1),
           acl: 'public-read'

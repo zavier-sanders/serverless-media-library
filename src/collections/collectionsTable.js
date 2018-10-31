@@ -135,6 +135,7 @@ class CollectionsTable extends Component {
   handleDelete = async (e) => {
     let collectionID = e.target.id;
     let user = this.state.user;
+    console.log(collectionID);
 
     if(window.confirm("Are you sure? This will also delete all photos within this collection?")) {
       deleteCollection(collectionID).then((data) => {
@@ -388,16 +389,6 @@ class CollectionsTable extends Component {
       return (
         <Grid.Row>
           <Grid.Column textAlign='center'>
-            <Confirm
-              id="upgradeModal"
-              open={this.state.open}
-              // header='This is a custom header'
-              content='Sorry, the BASIC plan has a max limit of 10 collections. Upgrade to PRO for unlimited collections.'
-              cancelButton='Maybe later'
-              confirmButton="Upgrade Now"
-              onCancel={this.handleCancel}
-              onConfirm={this.handleConfirm}
-            />
             <Table celled inverted selectable sortable>
               <Table.Header>
                 <Table.Row textAlign='center'>
@@ -410,7 +401,7 @@ class CollectionsTable extends Component {
 
               <Table.Body>
                 { this.state.tableData && this.state.tableData.map((data, i) =>
-                  <Table.Row key={data.collectionID}>
+                  <Table.Row key={data.albumID}>
                       <Table.Cell textAlign='center'>{data.name}</Table.Cell>
                       <Table.Cell textAlign='center'>{data.userID}</Table.Cell>
                       <Table.Cell textAlign='center'><Moment unix format="MM/DD/YYYY">{data.creationTime}</Moment></Table.Cell>
@@ -420,8 +411,7 @@ class CollectionsTable extends Component {
                         state: { user: this.state.user, folder: data.name } 
                         }}><Button primary style={{marginRight: '10px'}}>View</Button>
                         </Link>
-                        {/* <Button id={data.collectionID} name={data.name} onClick={this.handleEditOpen}>Edit</Button> */}
-                        <Button id={data.collectionID} name={data.name} negative onClick={this.handleDelete}>Delete</Button>
+                        <Button id={data.albumID} name={data.name} negative onClick={this.handleDelete}>Delete</Button>
                       </Table.Cell>
                   </Table.Row>
                 )}

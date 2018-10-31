@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Segment, Button, Form, Grid, Header, Message, List, Dropdown } from 'semantic-ui-react'
+import { Segment, Button, Form, Grid, Header, Message, List } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 import { MSG_PASSWORD_PATTERN, checkEmailPattern, checkPasswordPattern, checkNamePattern,
          handleResendVerificationCode, handleSubmitVerificationCode, handleSignUp, checkSignUpError } from './auth'
 import Verification from './Verification'
-import { window } from 'rxjs/operators/window';
 
 const STAGE_INFO = 'STAGE_INFO'
 const STAGE_VERIFICATION = 'STAGE_VERIFICATION'

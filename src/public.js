@@ -26,7 +26,7 @@ const HomepageHeading = ({ mobile }) => (
   <Container text>
     <Header
       as='h1'
-      content='GR-DAM'
+      content='Serverless Media Library'
       inverted
       style={{
         fontSize: mobile ? '2em' : '4em',
@@ -102,7 +102,7 @@ class DesktopContainer extends Component {
     const { children } = this.props
     const { fixed } = this.state
     let user = this.state.user;
-    let imgUrl = 'https://dih4lvql8rjzt.cloudfront.net/cms/495498fe-3f5f-4264-94f4-275f8c42cd28_hero-bg-image1_1_.jpg';
+    let imgUrl = 'https://static.pexels.com/photos/73871/rocket-launch-rocket-take-off-nasa-73871.jpeg';
     let styles = {
       minHeight: 700, 
       padding: '1em 0em',
@@ -127,9 +127,9 @@ class DesktopContainer extends Component {
               <Container>
               <Menu.Item as='a'><Link to='/'>
               {!fixed ? 
-                <img style={{ paddingTop: '15px', width: '120px'}} src='/gr-logo-reverse.svg' />
+                <img style={{ paddingTop: '15px', width: '120px'}} src='/logo-v2.png' />
                 :
-                <img style={{ paddingTop: '15px', width: '120px'}} src='/gr-logo.svg' />
+                <img style={{ paddingTop: '15px', width: '120px'}} src='/logo-v2dark.png' />
               }
                 
               </Link></Menu.Item>
@@ -301,10 +301,10 @@ const HomepageLayout = () => (
         >
           <a href='/'>The Solution</a>
         </Divider>
-        <Header textAlign='center' as='h3' style={{ fontSize: '2em' }}>GR-DAM</Header>
+        <Header textAlign='center' as='h3' style={{ fontSize: '2em' }}>AI Media Library</Header>
         <p style={{ fontSize: '1.33em', textAlign:'center' }}>
-        Enter GR-DAM, the easiest way to store and retrieve your digital assets. 
-        GR-DAM securely stores your files in the cloud, and uses Artificial Intelligence to automatically generate metadata so you can quickly find and reuse content more efficiently.
+        This Serverless, AI-powered media library easiest way to store and retrieve your digital assets. 
+        It securely stores your files in the cloud, and uses Artificial Intelligence to automatically generate metadata so you can quickly find and reuse content more efficiently.
         </p>
       </Container>
     </Segment>
@@ -314,7 +314,7 @@ const HomepageLayout = () => (
           <Grid.Column width={8}>
             <Header as='h3' style={{ fontSize: '2em' }}>Object & Scene Detection</Header>
             <p style={{ fontSize: '1.33em' }}>
-              GR-DAM automatically identifies thousands of objects such as vehicles, pets, and furniture. 
+              This media library automatically identifies thousands of objects such as vehicles, pets, and furniture. 
               It also detects scenes within an image, such as a sunset or beach. 
             </p>
             <p style={{ fontSize: '1.33em' }}>This makes it easy for you to search, filter, and curate large image libraries.</p>
@@ -344,7 +344,7 @@ const HomepageLayout = () => (
           <Grid.Column width={8}>
             <Header as='h3' style={{ fontSize: '2em' }}>Full Text Search</Header>
             <p style={{ fontSize: '1.33em' }}>
-            GR-DAM automates tagging and retrieval, meaning that when team members request images, logos, and other pieces of content, it saves you time by removing much of the manual, hunt-until-you-stumble-upon-it efforts. 
+            The media library automates tagging and retrieval, meaning that when team members request images, logos, and other pieces of content, it saves you time by removing much of the manual, hunt-until-you-stumble-upon-it efforts. 
             </p>
             
           </Grid.Column>

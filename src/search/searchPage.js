@@ -159,9 +159,9 @@ class DesktopContainer extends Component {
               <Container>
                 <Menu.Item as='a'><Link to='/'>
                 {!fixed ? 
-                  <img style={{ position: 'relative', top: '15px', width: '120px'}} src='/gr-logo-reverse.svg' />
+                  <img style={{ position: 'relative', top: '15px', width: '120px'}} src='/logo-v2.png' />
                   :
-                  <img style={{ paddingTop: '15px', width: '120px'}} src='/gr-logo.svg' />
+                  <img style={{ paddingTop: '15px', width: '120px'}} src='/logo-v2dark.png' />
                 }
                   
                 </Link></Menu.Item>
@@ -409,8 +409,8 @@ class SearchApp extends SearchkitComponent {
     }
 
     if (source.thumbnail) {
-      thumbImg = 'https://s3.amazonaws.com/' + source.thumbnail.s3Bucket + '/' + encodeURIComponent(source.thumbnail.s3Key);  
-      img = `https://s3.amazonaws.com/${source.thumbnail.s3Bucket}/${source.s3key}`;  
+      thumbImg = 'https://s3-us-west-2.amazonaws.com/' + source.thumbnail.s3Bucket + '/' + encodeURIComponent(source.thumbnail.s3Key);  
+      img = `https://s3-us-west-2.amazonaws.com/${source.thumbnail.s3Bucket}/${source.s3key}`;  
     } else {
       thumbImg = this.renderImage(source);
       img = this.renderImage(source);
@@ -644,7 +644,7 @@ class SearchApp extends SearchkitComponent {
         break;
 
       default:
-        return 'https://s3.amazonaws.com/' + itemData.thumbnail.s3Bucket + "/" + itemData.s3key
+        return 'https://s3-us-west-2.amazonaws.com/' + itemData.thumbnail.s3Bucket + "/" + itemData.s3key
         break;
     }
   }

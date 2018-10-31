@@ -144,16 +144,16 @@ class DesktopContainer extends Component {
               size='large'
             >
               <Container>
-                <Menu.Item as='a'><Link to='/'>
+                <Menu.Item href='/' as='a'>
                 {!fixed ? 
-                  <img style={{paddingTop: '15px', width: '120px'}} src='/gr-logo-reverse.svg' />
+                  <img style={{paddingTop: '15px', width: '120px'}} src='/logo-v2.png' />
                   :
-                  <img style={{paddingTop: '15px', width: '120px'}} src='/gr-logo-reverse.svg' />
+                  <img style={{paddingTop: '15px', width: '120px'}} src='/logo-v2.png' />
                 }
                   
-                </Link></Menu.Item>
-                <Menu.Item as='a' ><Link to='/'>Home</Link></Menu.Item>
-                <Menu.Item as='a' ><Link to='/collections'>Collections</Link></Menu.Item>
+                </Menu.Item>
+                <Menu.Item href='/' as='a' >Home</Menu.Item>
+                <Menu.Item href='/collections' as='a' >Collections</Menu.Item>
                 {user ? <Menu.Item as='a'><Link to={{ 
                           pathname: '/search', 
                           state: { user: user }}}>Search</Link></Menu.Item>
@@ -357,11 +357,11 @@ class SearchCollection extends SearchkitComponent {
 
     if (window.confirm("Are you sure you want to delete this file?")) {
       deletePhotoS3(ID).then(() => {
+        this.pollExecutionArn(ID)
         return archivePhoto(ID);
       }).then(() => {
         return deletePhoto(ID)
       }).then(() => {
-        this.pollExecutionArn(ID)
         return;
       });
     } else {
@@ -406,8 +406,8 @@ class SearchCollection extends SearchkitComponent {
     }
 
     if (source.thumbnail) {
-      thumbImg = 'https://s3.amazonaws.com/' + source.thumbnail.s3Bucket + '/' + encodeURIComponent(source.thumbnail.s3Key);  
-      img = `https://s3.amazonaws.com/${source.thumbnail.s3Bucket}/${source.s3key}`;  
+      thumbImg = 'https://s3-us-west-2.amazonaws.com/' + source.thumbnail.s3Bucket + '/' + encodeURIComponent(source.thumbnail.s3Key);  
+      img = `https://s3-us-west-2.amazonaws.com/${source.thumbnail.s3Bucket}/${source.s3key}`;  
     } else {
       thumbImg = this.renderImage(source);
       img = this.renderImage(source);
@@ -477,7 +477,7 @@ class SearchCollection extends SearchkitComponent {
         let _params = {
           Bucket: CONFIG.S3DAMBucket,
           Metadata: Object.assign({}, data.state.metadata, {keyname: name, type: data.files[i].type}),
-          Key: "Incoming/" + encodeURI(data.state.metadata.collection) + "/" + data.files[i].name.replace(/\+/g, " "),
+          Key: "Incoming/" + encodeURI(data.state.metadata.collection) + "/" + encodeURI(data.files[i].name),
           Body: blob,
           ACL:'public-read'
           
@@ -626,12 +626,12 @@ class SearchCollection extends SearchkitComponent {
     console.log('pollExecutionArn', imageID);
     this.executionArn = null;
     const interval = IntervalObservable.create(1000);
-    const arnObservable = interval.switchMap(() => getInfo(imageID))
+    const arnObservable = interval.switchMap(() => { return getInfo(imageID)})
       .filter((item) => (item && item.hasOwnProperty('executionArn')))
       .map((item) => (item.executionArn))
       .timeout(8000) // 8 seconds
       .first();
-      console.log('arnObservable', arnObservable);
+      //console.log('arnObservable', arnObservable);
     arnObservable.subscribe((arn) => {
       this.executionArn = arn;
       this.pollExecutionStatus(arn);
@@ -720,7 +720,7 @@ class SearchCollection extends SearchkitComponent {
         break;
 
       default:
-        return 'https://s3.amazonaws.com/' + itemData.thumbnail.s3Bucket + "/" + itemData.s3key
+        return 'https://s3-us-west-2.amazonaws.com/' + itemData.thumbnail.s3Bucket + "/" + itemData.s3key
         break;
     }
   }

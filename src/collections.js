@@ -108,9 +108,9 @@ class DesktopContainer extends Component {
               <Container>
                 <Menu.Item as='a'><Link to='/'>
                 {!fixed ? 
-                  <img style={{ paddingTop: '15px', width: '120px'}} src='/gr-logo-reverse.svg' />
+                  <img style={{ paddingTop: '15px', width: '120px'}} src='/logo-v2.png' />
                   :
-                  <img style={{ paddingTop: '15px', width: '120px'}} src='/gr-logo.svg' />
+                  <img style={{ paddingTop: '15px', width: '120px'}} src='/logo-v2dark.png' />
                 }
                   
                 </Link></Menu.Item>

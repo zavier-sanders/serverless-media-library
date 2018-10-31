@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Segment, Button, Divider, Form, Grid, Header, Message } from 'semantic-ui-react'
-import { Link, withRouter, Redirect } from 'react-router-dom'
-import { loginCallbackFactory, handleSignIn, sendMFAVerificationCode, getUser } from './auth'
+import { Link, withRouter } from 'react-router-dom'
+import { loginCallbackFactory, handleSignIn, sendMFAVerificationCode } from './auth'
 import Verification from './Verification'
-import { getUserInfo} from '../utility/users'
 
 const STAGE_INFO = 'STAGE_INFO'
 const STAGE_VERIFICATION = 'STAGE_VERIFICATION'
